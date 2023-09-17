@@ -1,0 +1,36 @@
+Import the necessary libraries:
+        requests: This library is used to make HTTP requests to websites.
+        BeautifulSoup: This library is used to parse HTML and extract data from it.
+        pandas: This library is used to create and manipulate data frames.
+
+
+This code essentially scrapes product data from Flipkart for the specified search query and number of pages, and saves the data to a CSV file.
+
+The code begins with importing the necessary libraries: requests for making HTTP requests, BeautifulSoup for parsing HTML, and pandas for data manipulation and analysis.
+
+The code defines a function called "scrape_flipkart_product_data" that takes three parameters: search_query (the product to search for), num_pages (the number of pages to scrape), and output_file (the name of the output CSV file).
+
+Inside the function, the base URL and headers for the requests are defined. The headers include a user-agent string to mimic a web browser.
+
+An empty list called product_list is created to store the scraped product data.
+
+A loop is initiated to iterate through the specified number of pages (from 1 to num_pages).
+
+Inside the loop, a GET request is made to the Flipkart search URL with the specified search query and page number. The response is stored in the response variable.
+
+The response's HTML content is parsed using BeautifulSoup, and the relevant product information is extracted using appropriate CSS selectors.
+
+For each product found on the page, the product name, rating, price, original price, and discount are extracted and stored in a dictionary called product_data.
+
+The product_data dictionary is appended to the product_list.
+
+If a connection timeout occurs during the request, an exception is caught and a message is printed. The loop then continues to the next page.
+
+Once the loop finishes, the product_list is used to create a pandas DataFrame called df. The [1:] is used to exclude the first row, which contains column names.
+
+The DataFrame is reset to have a new index, and then it is saved to a CSV file specified by output_file using the to_csv method.
+
+Finally, the function returns the first 10 rows of the DataFrame using the head(10) method.
+
+An example usage of the function is provided at the end, where the function is called with the search query 'realme', scraping 2 pages of results, and saving the output to a file named 'realme_mobiles.csv'.
+
